@@ -1,6 +1,17 @@
 import * as fabric from "fabric";
 import material from "material-colors";
 
+export const selectionDependTools = [ 
+  "fill",
+  "font",
+  "filter",
+  "opacity",
+  "remove-bg",
+  "stroke-color",
+  "stroke-width",
+]
+
+
 export const colors = [
   material.red["500"],
   material.pink["500"],
@@ -40,6 +51,11 @@ export type ActiveTool =
   | "templates"
   | "text";
 
+export interface EditorHookProps {
+  clearSelectionCallback?: ()=> void
+}
+
+
 export type BuildEditorProps = {
   canvas: fabric.Canvas;
   fillColor: string;
@@ -48,7 +64,10 @@ export type BuildEditorProps = {
   strokeColor: string;
   strokeWidth: number;
   setStrokeWidth: (value: number) => void;
-  selectedObjects:fabric.Object[]
+  selectedObjects:fabric.Object[];
+  strokeDashedArray:number[];
+  setStrokeDashedArray : (value :number[]) => void;
+
 };
 
 export interface Editor {
@@ -62,15 +81,18 @@ export interface Editor {
   addInverseTriangle: () => void;
   addDiamond: () => void;
   canvas: fabric.Canvas;
-  fillColor: string;
-  strokeColor: string;
-  strokeWidth: number;
+  getActiveFillCOLOR: ()=> string;
+  getActiveSTROKECOLOR: ()=> string;
+  getActiveSTROKEWIDTH: () => number ;
   selectedObjects: fabric.Object[]
+  changeStrokeDashedArray:(value :number[])=>void
+   getActiveSTROKEDashArray: () => number[] ;
 }
 
 export const Fill_COl = "rgba(0,0,0,1)";
 export const Stroke_COl = "rgba(0,0,0,1)";
 export const stroke_WIDTH = 2;
+export const stroke_Dashed_Array = [];
 
 export const Circle_Options = {
   height: 100,
