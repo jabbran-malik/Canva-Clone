@@ -1,6 +1,27 @@
 import * as fabric from "fabric";
 import material from "material-colors";
 
+export const fonts = [
+  "Arial",
+  "Arial Black",
+  "Verdana",
+  "Helvetica",
+  "Tahoma",
+  "Trebuchet MS",
+  "Times New Roman",
+  "Georgia",
+  "Garamond",
+  "Courier New",
+  "Brush Script MT",
+  "Palatino",
+  "Bookman",
+  "Comic Sans MS",
+  "Impact",
+  "Lucida Sans Unicode",
+  "Geneva",
+  "Lucida Console",
+];
+
 export const selectionDependTools = [
   "fill",
   "font",
@@ -65,6 +86,8 @@ export type BuildEditorProps = {
   selectedObjects: fabric.Object[];
   strokeDashedArray: number[];
   setStrokeDashedArray: (value: number[]) => void;
+  fontFamily: string;
+  setFontFamily: (value: string) => void;
 };
 
 export interface Editor {
@@ -84,19 +107,32 @@ export interface Editor {
   addDiamond: () => void;
   canvas: fabric.Canvas;
   getActiveFillCOLOR: () => string;
+  getActivefontFamily: () => string;
   getActiveSTROKECOLOR: () => string;
   getActiveSTROKEWIDTH: () => number;
+  getActivefontWeight: () => number;
   selectedObjects: fabric.Object[];
   changeStrokeDashedArray: (value: number[]) => void;
   getActiveSTROKEDashArray: () => number[];
+  changeFontFamily: (value: string) => void;
+  changeFontWeight: (value: number) => void;
+  changeFontStyle: (value: string) => void;
+  getActivefontStyle: () => string;
+  changeFontLinethrough: (value: boolean) => void
+  getActiveFontLinethrough: () => boolean
+  changeFontUnderline: (value: boolean) => void
+  getActiveFontUnderline: () => boolean
+  changeTextAlign: (value: string) => void
+  getActivetextAlign: () => string;
 }
 
 export const Fill_COl = "rgba(0,0,0,1)";
 export const Stroke_COl = "rgba(0,0,0,1)";
 export const stroke_WIDTH = 2;
 export const stroke_Dashed_Array = [];
-export const FONT_FAMILY="Arial"
-export const FONT_SIZE=32
+export const FONT_FAMILY = "Arial"
+export const FONT_SIZE = 32
+export const FONT_WEIGHT = 400
 
 
 export const Circle_Options = {
@@ -139,8 +175,9 @@ export const TrianGle_Options = {
   strokeWIDTH: stroke_WIDTH,
 };
 export const Text_OPTIONS = {
-  fontsize:FONT_SIZE,
-  fontFamily:FONT_FAMILY,
+  fontsize: FONT_SIZE,
+  fontFamily: FONT_FAMILY,
+  fontWeight: FONT_WEIGHT,
   left: 100,
   top: 100,
   fill: Fill_COl,
