@@ -13,6 +13,7 @@ import {
   Stroke_COl,
   stroke_Dashed_Array,
   stroke_WIDTH,
+  Text_OPTIONS,
   TrianGle_Options,
 } from "../types";
 import { useCanvasEvents } from "@/features/editor/hooks/use-canva-events";
@@ -51,6 +52,65 @@ const buildEditor = ({
   };
 
   return {
+    addText: (value, options = {})=>{
+      const object = new fabric.Textbox(value, {
+      ...Text_OPTIONS,
+      ...options,
+   fill:fillColor,
+    })
+    addToCanvas(object)
+
+    },
+
+
+
+
+
+
+    getActiveOpacity:()=>{
+const selectedObject=selectedObjects[0]
+if(!selectedObject){
+  return 1
+  
+}
+const value=selectedObject.get("opacity")||1;
+return value
+    },
+
+
+
+    changeOpacity :(value:number)=>{
+      canvas.getActiveObjects().forEach((Object)=>{
+        Object.set({opacity:value});
+      })
+      canvas.renderAll()
+    },
+
+
+    bringforward: () => {
+      canvas.getActiveObjects().forEach((object) => {
+        canvas.bringObjectForward(object);
+      });
+      canvas.renderAll();
+      const workspace = getWorkspace();
+
+      if (workspace) {
+        canvas.sendObjectToBack(workspace);
+      }
+    },
+    sendBackwards: () => {
+      canvas.getActiveObjects().forEach((object) => {
+        canvas.sendObjectBackwards(object);
+      });
+      canvas.renderAll();
+
+      const workspace = getWorkspace();
+
+      if (workspace) {
+        canvas.sendObjectToBack(workspace);
+      }
+    },
+
     changeFillColor: (value: string) => {
       setFillColor(value);
       canvas.getActiveObjects().forEach((object) => {

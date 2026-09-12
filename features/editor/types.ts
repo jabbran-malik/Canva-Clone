@@ -1,7 +1,7 @@
 import * as fabric from "fabric";
 import material from "material-colors";
 
-export const selectionDependTools = [ 
+export const selectionDependTools = [
   "fill",
   "font",
   "filter",
@@ -9,8 +9,7 @@ export const selectionDependTools = [
   "remove-bg",
   "stroke-color",
   "stroke-width",
-]
-
+];
 
 export const colors = [
   material.red["500"],
@@ -52,9 +51,8 @@ export type ActiveTool =
   | "text";
 
 export interface EditorHookProps {
-  clearSelectionCallback?: ()=> void
+  clearSelectionCallback?: () => void;
 }
-
 
 export type BuildEditorProps = {
   canvas: fabric.Canvas;
@@ -64,13 +62,17 @@ export type BuildEditorProps = {
   strokeColor: string;
   strokeWidth: number;
   setStrokeWidth: (value: number) => void;
-  selectedObjects:fabric.Object[];
-  strokeDashedArray:number[];
-  setStrokeDashedArray : (value :number[]) => void;
-
+  selectedObjects: fabric.Object[];
+  strokeDashedArray: number[];
+  setStrokeDashedArray: (value: number[]) => void;
 };
 
 export interface Editor {
+  addText: (value: string, options?: Partial<fabric.TextboxProps>) => void
+  bringforward: () => void;
+  sendBackwards: () => void;
+  changeOpacity: (value: number) => void;
+  getActiveOpacity: () => number;
   changeFillColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
   changeStrokeColor: (value: string) => void;
@@ -81,18 +83,21 @@ export interface Editor {
   addInverseTriangle: () => void;
   addDiamond: () => void;
   canvas: fabric.Canvas;
-  getActiveFillCOLOR: ()=> string;
-  getActiveSTROKECOLOR: ()=> string;
-  getActiveSTROKEWIDTH: () => number ;
-  selectedObjects: fabric.Object[]
-  changeStrokeDashedArray:(value :number[])=>void
-   getActiveSTROKEDashArray: () => number[] ;
+  getActiveFillCOLOR: () => string;
+  getActiveSTROKECOLOR: () => string;
+  getActiveSTROKEWIDTH: () => number;
+  selectedObjects: fabric.Object[];
+  changeStrokeDashedArray: (value: number[]) => void;
+  getActiveSTROKEDashArray: () => number[];
 }
 
 export const Fill_COl = "rgba(0,0,0,1)";
 export const Stroke_COl = "rgba(0,0,0,1)";
 export const stroke_WIDTH = 2;
 export const stroke_Dashed_Array = [];
+export const FONT_FAMILY="Arial"
+export const FONT_SIZE=32
+
 
 export const Circle_Options = {
   height: 100,
@@ -132,4 +137,11 @@ export const TrianGle_Options = {
   fill: Fill_COl,
   stroke: Stroke_COl,
   strokeWIDTH: stroke_WIDTH,
+};
+export const Text_OPTIONS = {
+  fontsize:FONT_SIZE,
+  fontFamily:FONT_FAMILY,
+  left: 100,
+  top: 100,
+  fill: Fill_COl,
 };
