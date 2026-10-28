@@ -91,6 +91,7 @@ export type BuildEditorProps = {
 };
 
 export interface Editor {
+  delete :() => void
   addText: (value: string, options?: Partial<fabric.TextboxProps>) => void
   bringforward: () => void;
   sendBackwards: () => void;
@@ -124,6 +125,8 @@ export interface Editor {
   getActiveFontUnderline: () => boolean
   changeTextAlign: (value: string) => void
   getActivetextAlign: () => string;
+  changeFontSize: (value: number) => void
+  getActiveFontSize: () => number;
 }
 
 export const Fill_COl = "rgba(0,0,0,1)";
